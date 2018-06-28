@@ -16,11 +16,11 @@ class Article extends Component {
     };
 
     componentDidMount() {
-        this.loadarticle();
+        this.loadArticle();
     }
 
     loadArticle = () => {
-        API.getarticle()
+        API.getArticles()
             .then(res =>
                 this.setState({ article: res.data, title: "", startYear: "", endYear: "" })
             )
@@ -116,4 +116,4 @@ class Article extends Component {
     }
 }
 
-export default article;
+export default Article;

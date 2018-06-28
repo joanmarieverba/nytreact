@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
     // Gets all articles
-    getArticle: function () {
+    getArticles: function () {
         return axios.get("/api/articles");
     },
     // Gets the article with the given id
