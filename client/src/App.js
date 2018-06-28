@@ -1,10 +1,10 @@
 import React from "react";
-// import Books from "./pages/Books";
+// import Articles from "./pages/Articles";
 
 const App = () => (
-  // <div>
-  //   <Books />
-  // </div>
+  <div>
+    <Articles />
+  </div>
 );
 
 export default App;
