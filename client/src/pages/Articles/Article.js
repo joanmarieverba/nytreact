@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, FormBtn } from "../../components/Form";
-
+import axios from 'axios';
 class Article extends Component {
     state = {
         article: [],
@@ -16,13 +16,29 @@ class Article extends Component {
     };
 
     componentDidMount() {
-        this.loadArticle();
-    }
+        //this.loadArticle();
+
+        axios.get(`https://developer.nytimes.com/proxy/https/api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7743e049fd004ee1a7f2289b00f02b17&q=climate+change&begin_date=20180101&end_date=20180301`)
+            .then(res => {
+                const article = res.data;
+                this.setState({ article });
+                console.log("article ", this.state.article);
+                //this is correct
+                console.log("headline ", this.state.article.response.docs[0].headline.main);
+            })
+        //    .catch(err => res.status(422).json(err));
+    };
+
+    // response.docs[i].headline.main
+    // response.docs[i].pub_date
+    // response.docs[i].web_url
+    // response.docs[i]._id
 
     loadArticle = () => {
         API.getArticles()
             .then(res =>
-                this.setState({ article: res.data, title: "", startYear: "", endYear: "" })
+                {console.log("res ", res);
+                this.setState({ article: res.data, title: "", startYear: "", endYear: "" })}
             )
             .catch(err => console.log(err));
     };
@@ -52,6 +68,8 @@ class Article extends Component {
                 .catch(err => console.log(err));
         }
     };
+
+
 
     render() {
         return (
