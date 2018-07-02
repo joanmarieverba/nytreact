@@ -1,1 +1,0 @@
-const articleController = require("../../controllers/nytController");

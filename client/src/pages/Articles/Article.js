@@ -1,12 +1,35 @@
 import React, { Component } from "react";
-import DeleteBtn from "../../components/DeleteBtn";
+//import DeleteBtn from "../../components/DeleteBtn";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
+//import { List, ListItem } from "../../components/List";
 import { Input, FormBtn } from "../../components/Form";
 import axios from 'axios';
+
+const btnStyle = {
+    float: "right",
+};
+
+const textStyle = {
+    color: "blue", 
+};
+
+const resultsLine = {
+    display: "inline-block",
+    border: "1px solid black",
+    width: "100%",
+    marginBottom: "5px",
+}
+
+// const panel = {
+//     marginBottom: "20px",
+//     border: "1px solid transparent",
+//     borderRadius: "4px",
+//     backgroundColor: "white",
+// };
+
 class Article extends Component {
     state = {
         article: [],
@@ -85,8 +108,16 @@ class Article extends Component {
 
     render() {
         let displayArticles = this.state.article.map((eachItem, index) => 
-            <h2 key={index}>{eachItem.headline.main}</h2>
-        );
+
+            // response.docs[i].headline.main
+    // response.docs[i].pub_date
+    // response.docs[i].web_url
+    // response.docs[i]._id
+            
+    <div style={resultsLine}><a key={index} href={eachItem.web_url}><h5 style={textStyle} key={index}>{eachItem.headline.main}</h5></a>
+       <button style={btnStyle} key={eachItem._id} onClick={() => this.deletearticle(eachItem._id)}>SAVE</button></div>
+
+    );
         return (
             <Container fluid>
                 <Row>
@@ -131,19 +162,8 @@ class Article extends Component {
                         </Jumbotron>
 
                         {displayArticles}
-                        {/* {this.state.article.length ? (
-                            <List>
-                                {this.state.article.map(article => (
-                                    <ListItem key={article._id}>
-                                        <Link to={"/article/" + article._id}>
-                                            <strong>
-                                                {article.title} 
-                                            </strong>
-                                        </Link>
-                                        <DeleteBtn onClick={() => this.deletearticle(article._id)} />
-                                    </ListItem>
-                                ))}
-                            </List>
+                        {/* {displayArticles.length ? (
+                   
                         ) : (
                                 <h3>No Results to Display</h3>
                             )} */}
