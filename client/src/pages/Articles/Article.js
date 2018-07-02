@@ -18,14 +18,16 @@ class Article extends Component {
     componentDidMount() {
         //this.loadArticle();
 
-        axios.get(`https://developer.nytimes.com/proxy/https/api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7743e049fd004ee1a7f2289b00f02b17&q=climate+change&begin_date=20180101&end_date=20180301`)
-            .then(res => {
-                const article = res.data;
-                this.setState({ article });
-                console.log("article ", this.state.article);
-                //this is correct
-                console.log("headline ", this.state.article.response.docs[0].headline.main);
-            })
+    //     axios.get(`https://developer.nytimes.com/proxy/https/api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7743e049fd004ee1a7f2289b00f02b17&q=climate+change&begin_date=20180101&end_date=20180301`)
+        
+    //    // axios.get(`https://developer.nytimes.com/proxy/https/api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7743e049fd004ee1a7f2289b00f02b17&q=${this.state.title}&begin_date=${this.state.startYear}0101&end_date=${this.state.endYear}1231`)
+    //         .then(res => {
+    //             const article = res.data;
+    //             this.setState({ article });
+    //             console.log("article ", this.state.article);
+    //             //this is correct
+    //             console.log("headline ", this.state.article.response.docs[0].headline.main);
+    //         });
         //    .catch(err => res.status(422).json(err));
     };
 
@@ -58,20 +60,33 @@ class Article extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        if (this.state.title && this.state.startYear && this.state.endYear) {
-            API.saveArticle({
-                title: this.state.title,
-                date: this.state.startYear,
-                url: this.state.endYear
-            })
-                .then(res => this.loadArticle())
-                .catch(err => console.log(err));
-        }
+            axios.get(`https://developer.nytimes.com/proxy/https/api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7743e049fd004ee1a7f2289b00f02b17&q=${this.state.title}&begin_date=${this.state.startYear}0101&end_date=${this.state.endYear}1231`)
+            .then(res => {
+                // const article = res.data;
+                console.log("res.data ", res.data.response.docs);
+                this.setState({ article: res.data.response.docs });
+                console.log("article ", this.state.article);
+                //this is correct
+                //console.log("headline ", this.state.article.response.docs[0].headline.main);
+          
+            // if (this.state.title && this.state.startYear && this.state.endYear) {
+            //     API.saveArticle({
+            //         title: this.state.title,
+            //         date: this.state.startYear,
+            //         url: this.state.endYear
+            //     })
+            //         .then(res => this.loadArticle())
+            //         .catch(err => console.log(err));
+            // }
+        });
     };
 
 
 
     render() {
+        let displayArticles = this.state.article.map((eachItem, index) => 
+            <h2 key={index}>{eachItem.headline.main}</h2>
+        );
         return (
             <Container fluid>
                 <Row>
@@ -107,14 +122,16 @@ class Article extends Component {
                                 onClick={this.handleFormSubmit}
                             >
                                 Search
-              </FormBtn>
+                            </FormBtn>
                         </form>
                     </Col>
                     <Col size="md-6 sm-12">
                         <Jumbotron>
                             <h1>Results</h1>
                         </Jumbotron>
-                        {this.state.article.length ? (
+
+                        {displayArticles}
+                        {/* {this.state.article.length ? (
                             <List>
                                 {this.state.article.map(article => (
                                     <ListItem key={article._id}>
@@ -129,7 +146,7 @@ class Article extends Component {
                             </List>
                         ) : (
                                 <h3>No Results to Display</h3>
-                            )}
+                            )} */}
                     </Col>
                 </Row>
             </Container>
