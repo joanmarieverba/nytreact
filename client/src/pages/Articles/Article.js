@@ -47,19 +47,7 @@ class Article extends Component {
     };
 
     componentDidMount() {
-        //this.loadArticle();
 
-    //     axios.get(`https://developer.nytimes.com/proxy/https/api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7743e049fd004ee1a7f2289b00f02b17&q=climate+change&begin_date=20180101&end_date=20180301`)
-        
-    //    // axios.get(`https://developer.nytimes.com/proxy/https/api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7743e049fd004ee1a7f2289b00f02b17&q=${this.state.title}&begin_date=${this.state.startYear}0101&end_date=${this.state.endYear}1231`)
-    //         .then(res => {
-    //             const article = res.data;
-    //             this.setState({ article });
-    //             console.log("article ", this.state.article);
-    //             //this is correct
-    //             console.log("headline ", this.state.article.response.docs[0].headline.main);
-    //         });
-        //    .catch(err => res.status(422).json(err));
     };
 
     // response.docs[i].headline.main
@@ -67,25 +55,36 @@ class Article extends Component {
     // response.docs[i].web_url
     // response.docs[i]._id
 
+
+ //******** LOAD ARTICLE ***************////   
     loadArticle = () => {
-        API.getArticles()
-            .then(res =>
-                {console.log("res ", res);
-                this.setState({ article: res.data, title: "", startYear: "", endYear: "" })}
-            )
-            .catch(err => console.log(err));
+        // API.getArticles()
+        //     .then(res => {
+        //         console.log("res ", res);
+        //         this.setState({ article: res.data, title: "", startYear: "", endYear: "" })
+        //     }
+        //     )
+        //     .catch(err => console.log(err));
     };
+
 
     deleteArticle = id => {
         API.deleteArticle(id)
-            .then(res => this.loadarticle())
+            .then(res => this.loadArticle())
             .catch(err => console.log(err));
     };
 
-    saveArticle = id => {
-        API.saveArticle(id)
-            .then(res => this.loadarticle())
-            .catch(err => console.log(err));
+    saveArticle = index => {
+                API.saveArticle(index)({
+                    title: this.state.article[index].headline.main,
+                    date: this.state.article[index].pub_date,
+                    url: this.state.article[index].web_url,
+                    saved: false,
+                    note: "",
+                    nytid: this.state.article[index]._id
+                })
+                    .then(res => this.loadArticle())
+                    .catch(err => console.log(err));       
     };
 
     handleInputChange = event => {
@@ -105,21 +104,13 @@ class Article extends Component {
                 console.log("article ", this.state.article);
                 //this is correct
                 //console.log("headline ", this.state.article.response.docs[0].headline.main);
-          ////*****only need 5 articles *********/////////////
-                for (let i=0; i < 5; i++) {
-                    if (this.state.headline.main && this.state.pub_date && this.state.web_url) {
-                        API.saveArticle({
-                            title: this.state.headline.main,
-                            date: this.state.pub_date,
-                            url: this.state.web_url,
-                            saved: false,
-                            note: "",
-                            nytid: this.state._id
-                        })
-                            .then(res => this.loadArticle())
-                            .catch(err => console.log(err));
-                    }
-                };
+
+                //put date in readable format
+                // this.state.article.forEach((item) => {
+                //     item.pub_date = item.pub_date.substring(0, 10);
+                // })
+  
+
         });
     };
   
@@ -130,17 +121,18 @@ class Article extends Component {
 
     render() {
         let displayArticles = this.state.article.map((eachItem, index) => 
-
+            
             <div style={resultsLine}><a key={index} href={eachItem.web_url}><h5 style={textStyle} key={index}>{eachItem.headline.main}</h5></a>
-            <button style={btnStyle} key={eachItem._id} onClick={() => this.deletearticle(eachItem._id)}>SAVE</button></div>
-
+                <h5 style={textStyle} key={index}>Date: {eachItem.pub_date.substring(0, 10)}</h5>
+            <button style={btnStyle} key={eachItem._id} onClick={() => this.saveArticle(index)}>SAVE</button></div>
+            
         );
 
         let savedArticles = this.state.article.map((eachItem, index) =>
-
+          
             <div style={resultsLine}><a key={index} href={eachItem.web_url}><h5 style={textStyle} key={index}>{eachItem.headline.main}</h5></a>
-                <h5 style={textStyle} key={index}>Date Saved{eachItem.pub_date}</h5>
-                <button style={btnStyle} key={eachItem._id} onClick={() => this.deleteArticle(eachItem._id)}>DELETE</button></div>
+                <h5 style={textStyle} key={index}>Date Saved: {eachItem.pub_date.substring(0, 10)}</h5>
+                <button style={btnStyle} key={eachItem._id} onClick={() => this.deleteArticle(index)}>DELETE</button></div>
 
         );
         return (
