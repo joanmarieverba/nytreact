@@ -11,6 +11,7 @@ router
     .route("/:id")
     .get(articleController.findById)
     .put(articleController.update)
-    .delete(articleController.remove);
+    .delete(articleController.remove)
+    .post(articleController.create);
 
 module.exports = router;

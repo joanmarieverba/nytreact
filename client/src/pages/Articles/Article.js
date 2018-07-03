@@ -74,17 +74,19 @@ class Article extends Component {
             .catch(err => console.log(err));
     };
 
+ //   app.post("/api/article/:id", function(req, res) {
+
     saveArticle = index => {
-                API.saveArticle(index)({
-                    title: this.state.article[index].headline.main,
-                    date: this.state.article[index].pub_date,
-                    url: this.state.article[index].web_url,
-                    saved: false,
-                    note: "",
-                    nytid: this.state.article[index]._id
-                })
-                    .then(res => this.loadArticle())
-                    .catch(err => console.log(err));       
+        API.saveArticle(index)({
+            title: this.state.article[index].headline.main,
+            date: this.state.article[index].pub_date,
+            url: this.state.article[index].web_url,
+            saved: false,
+            note: "",
+            nytid: this.state.article[index]._id
+        })
+            .then(res => this.loadArticle())
+            .catch(err => console.log(err));       
     };
 
     handleInputChange = event => {
