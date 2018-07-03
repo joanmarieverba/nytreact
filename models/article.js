@@ -7,6 +7,7 @@ const articleSchema = new Schema({
     date: { type: String, default: Date.now },
     saved: { type: Boolean, default: false },
     note: { type: String },
+    nytid: {type: String},
 });
 
 const Article = mongoose.model("Article", articleSchema);
