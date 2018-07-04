@@ -9,13 +9,13 @@ import { Input, FormBtn } from "../../components/Form";
 import axios from 'axios';
 //const API = require("../../utils/API");
 
-const backgroundStyle = {
+// const backgroundStyle = {
 
-    backgroundImage: 'url("news.jpg")',
-    width: '100%',
-    minHeight: '100%',
-    backgroundSize: "100%",
-};
+//     backgroundImage: 'url("news.jpg")',
+//     width: '100%',
+//     minHeight: '100%',
+//     backgroundSize: "100%",
+// };
 
 const btnStyle = {
     float: "right",
@@ -72,13 +72,13 @@ class Article extends Component {
  //   app.post("/api/article/:id", function(req, res) {
 
     saveArticle = index => {
-        const payload = {
-            title: this.state.article[index].headline,
+        const articleData = {
+            title: this.state.article[index].headline.main,
             date: this.state.article[index].pub_date,
             url: this.state.article[index].web_url,
             saved: false,
             nytid: this.state.article[index]._id}
-        API.saveArticle(payload)
+        API.saveArticle(articleData)
             .then(res => {
                 this.loadArticle()
                 console.log("save article ", res);
@@ -136,7 +136,7 @@ class Article extends Component {
         );
         return (
    
-            <Container fluid style={backgroundStyle} >
+            <Container fluid >
             {/* <div style={backgroundStyle} > */}
                 <Row>
                     <Col size="md-6">
