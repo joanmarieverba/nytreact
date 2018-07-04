@@ -6,7 +6,6 @@ const articleSchema = new Schema({
     url: { type: String, required: true },
     date: { type: String, default: Date.now },
     saved: { type: Boolean, default: false },
-    note: { type: String },
     nytid: {type: String},
 });
 

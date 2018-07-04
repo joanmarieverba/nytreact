@@ -2,11 +2,12 @@ import React, { Component } from "react";
 //import DeleteBtn from "../../components/DeleteBtn";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 //import { List, ListItem } from "../../components/List";
 import { Input, FormBtn } from "../../components/Form";
 import axios from 'axios';
+//const API = require("../../utils/API");
 
 const backgroundStyle = {
 
@@ -31,12 +32,6 @@ const resultsLine = {
     marginBottom: "5px",
 }
 
-// const panel = {
-//     marginBottom: "20px",
-//     border: "1px solid transparent",
-//     borderRadius: "4px",
-//     backgroundColor: "white",
-// };
 
 class Article extends Component {
     state = {
@@ -77,16 +72,18 @@ class Article extends Component {
  //   app.post("/api/article/:id", function(req, res) {
 
     saveArticle = index => {
-        API.saveArticle(index)({
-            title: this.state.article[index].headline.main,
+        const payload = {
+            title: this.state.article[index].headline,
             date: this.state.article[index].pub_date,
             url: this.state.article[index].web_url,
             saved: false,
-            note: "",
-            nytid: this.state.article[index]._id
-        })
-            .then(res => this.loadArticle())
-            .catch(err => console.log(err));       
+            nytid: this.state.article[index]._id}
+        API.saveArticle(payload)
+            .then(res => {
+                this.loadArticle()
+                console.log("save article ", res);
+            })
+            .catch(err => console.log(err));      
     };
 
     handleInputChange = event => {
@@ -124,17 +121,17 @@ class Article extends Component {
     render() {
         let displayArticles = this.state.article.map((eachItem, index) => 
             
-            <div style={resultsLine}><a key={index} href={eachItem.web_url}><h5 style={textStyle} key={index}>{eachItem.headline.main}</h5></a>
-                <h5 style={textStyle} key={index}>Date: {eachItem.pub_date.substring(0, 10)}</h5>
-            <button style={btnStyle} key={eachItem._id} onClick={() => this.saveArticle(index)}>SAVE</button></div>
+            <div key={index} style={resultsLine}><a href={eachItem.web_url}><h5 style={textStyle} >{eachItem.headline.main}</h5></a>
+                <h5 style={textStyle} >Date: {eachItem.pub_date.substring(0, 10)}</h5>
+            <button style={btnStyle} onClick={() => this.saveArticle(index)}>SAVE</button></div>
             
         );
 
         let savedArticles = this.state.article.map((eachItem, index) =>
           
-            <div style={resultsLine}><a key={index} href={eachItem.web_url}><h5 style={textStyle} key={index}>{eachItem.headline.main}</h5></a>
-                <h5 style={textStyle} key={index}>Date Saved: {eachItem.pub_date.substring(0, 10)}</h5>
-                <button style={btnStyle} key={eachItem._id} onClick={() => this.deleteArticle(index)}>DELETE</button></div>
+            <div key={eachItem._id} style={resultsLine}><a  href={eachItem.web_url}><h5 style={textStyle} >{eachItem.headline.main}</h5></a>
+                <h5 style={textStyle} >Date Saved: {eachItem.pub_date.substring(0, 10)}</h5>
+                <button style={btnStyle} onClick={() => this.deleteArticle(index)}>DELETE</button></div>
 
         );
         return (
