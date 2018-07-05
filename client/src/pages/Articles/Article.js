@@ -13,7 +13,6 @@ import axios from 'axios';
 //     backgroundSize: "100%",
 // };
 
-//convert Date.now: var d = new Date().toISOString();
 
 const btnStyle = {
     float: "right",
@@ -66,7 +65,7 @@ class Article extends Component {
     saveArticle = index => {
         const articleData = {
             title: this.state.article[index].headline.main,
-            date: this.state.article[index].pub_date,
+       //     date: this.state.article[index].pub_date,
             url: this.state.article[index].web_url,
             saved: true,
             nytid: this.state.article[index]._id}
@@ -108,9 +107,9 @@ class Article extends Component {
         );
 
         let savedArticles = this.state.savedArticle.map((eachItem, index) =>
-          
+  
             <div key={eachItem._id} style={resultsLine}><a  href={eachItem.url}><h5 style={textStyle} >{eachItem.title}</h5></a>
-                <h5 style={textStyle} >Date Saved: {eachItem.date}</h5>
+                <h5 style={textStyle} >Date Saved: {eachItem.date.substring(0, 10)}</h5>
                 <button style={btnStyle} onClick={() => this.deleteArticle(eachItem._id)}>DELETE</button></div>
 
         );
@@ -176,3 +175,15 @@ class Article extends Component {
 }
 
 export default Article;
+
+
+
+
+// exports default class MyComponent extends React.Component {
+//     render() {
+//         return (
+//             const dateToFormat = '1976-04-19T12:59-0500';
+//             <Moment> { dateToFormat }</Moment >
+//         );
+//     }
+// }
