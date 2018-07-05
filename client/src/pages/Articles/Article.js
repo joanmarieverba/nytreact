@@ -17,6 +17,8 @@ import axios from 'axios';
 //     backgroundSize: "100%",
 // };
 
+//convert Date.now: var d = new Date().toISOString();
+
 const btnStyle = {
     float: "right",
 };
@@ -36,6 +38,7 @@ const resultsLine = {
 class Article extends Component {
     state = {
         article: [],
+        savedArticle: [],
         title: "",
         startYear: "",
         endYear: ""
@@ -53,13 +56,13 @@ class Article extends Component {
 
  //******** LOAD ARTICLE ***************////   
     loadArticle = () => {
-        // API.getArticles()
-        //     .then(res => {
-        //         console.log("res ", res);
-        //         this.setState({ article: res.data, title: "", startYear: "", endYear: "" })
-        //     }
-        //     )
-        //     .catch(err => console.log(err));
+        API.getArticles()
+            .then(res => {
+                console.log("res ", res);
+               // this.setState({ savedArticle: res.data })
+            }
+            )
+            .catch(err => console.log(err));
     };
 
 
