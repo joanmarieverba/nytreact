@@ -58,7 +58,7 @@ class Article extends Component {
     loadArticle = () => {
         API.getArticles()
             .then(res => {
-                console.log("res ", res);
+                console.log("load article res ", res);
                // this.setState({ savedArticle: res.data })
             }
             )
