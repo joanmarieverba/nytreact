@@ -3,9 +3,10 @@ const db = require("../models");
 // Defining methods for the ArticlesController
 module.exports = {
     findAll: function (req, res) {
+        console.log("articleController ", req.body, req.query);
         db.Article
             .find(req.query)
-            .sort({ saved: true })
+  //          .sort({ saved: true })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
@@ -16,7 +17,6 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     create: function (req, res) {
-        console.log("articleController ", req.body);
             const article = {
             title: req.body.title,
             url:  req.body.url,

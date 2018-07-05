@@ -56,12 +56,13 @@ class Article extends Component {
 
  //******** LOAD ARTICLE ***************////   
     loadArticle = () => {
+        console.log("this.loadArticle called");
         API.getArticles()
             .then(res => {
-                console.log("load article res ", res);
-               // this.setState({ savedArticle: res.data })
-            }
-            )
+                console.log("load article res ", res.data);
+                this.setState({ savedArticle: res.data });
+                console.log("savedArticle ", this.state.savedArticle)
+            })
             .catch(err => console.log(err));
     };
 
@@ -71,8 +72,6 @@ class Article extends Component {
             .then(res => this.loadArticle())
             .catch(err => console.log(err));
     };
-
- //   app.post("/api/article/:id", function(req, res) {
 
     saveArticle = index => {
         const articleData = {
@@ -130,10 +129,10 @@ class Article extends Component {
             
         );
 
-        let savedArticles = this.state.article.map((eachItem, index) =>
+        let savedArticles = this.state.savedArticle.map((eachItem, index) =>
           
-            <div key={eachItem._id} style={resultsLine}><a  href={eachItem.web_url}><h5 style={textStyle} >{eachItem.headline.main}</h5></a>
-                <h5 style={textStyle} >Date Saved: {eachItem.pub_date.substring(0, 10)}</h5>
+            <div key={eachItem._id} style={resultsLine}><a  href={eachItem.url}><h5 style={textStyle} >{eachItem.title}</h5></a>
+                <h5 style={textStyle} >Date Saved: {eachItem.date}</h5>
                 <button style={btnStyle} onClick={() => this.deleteArticle(index)}>DELETE</button></div>
 
         );
