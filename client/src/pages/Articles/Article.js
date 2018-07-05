@@ -4,10 +4,11 @@ import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Input, FormBtn } from "../../components/Form";
 import axios from 'axios';
+//import Background from "news.jpg";
 
 // const backgroundStyle = {
-
-//     backgroundImage: 'url("news.jpg")',
+//      backgroundImage: 'url("news.jpg")',
+//    backgroundImage: `url(${Background})`,
 //     width: '100%',
 //     minHeight: '100%',
 //     backgroundSize: "100%",
