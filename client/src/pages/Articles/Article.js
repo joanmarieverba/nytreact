@@ -76,7 +76,7 @@ class Article extends Component {
             title: this.state.article[index].headline.main,
             date: this.state.article[index].pub_date,
             url: this.state.article[index].web_url,
-            saved: false,
+            saved: true,
             nytid: this.state.article[index]._id}
         API.saveArticle(articleData)
             .then(res => {
