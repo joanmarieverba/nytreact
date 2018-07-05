@@ -103,14 +103,6 @@ class Article extends Component {
                 console.log("res.data ", res.data.response.docs);
                 this.setState({ article: res.data.response.docs });
                 console.log("article ", this.state.article);
-                //this is correct
-                //console.log("headline ", this.state.article.response.docs[0].headline.main);
-
-                //put date in readable format
-                // this.state.article.forEach((item) => {
-                //     item.pub_date = item.pub_date.substring(0, 10);
-                // })
-  
 
         });
     };
@@ -133,7 +125,7 @@ class Article extends Component {
           
             <div key={eachItem._id} style={resultsLine}><a  href={eachItem.url}><h5 style={textStyle} >{eachItem.title}</h5></a>
                 <h5 style={textStyle} >Date Saved: {eachItem.date}</h5>
-                <button style={btnStyle} onClick={() => this.deleteArticle(index)}>DELETE</button></div>
+                <button style={btnStyle} onClick={() => this.deleteArticle(eachItem._id)}>DELETE</button></div>
 
         );
         return (
