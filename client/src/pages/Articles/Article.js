@@ -121,7 +121,7 @@ class Article extends Component {
                     <Col size="md-6">
                         <Jumbotron>
                             <h1>New York Times Article Scrubber</h1>
-                            <h2>Search for and annotate articles of interest!</h2>
+                            <h2>Search for and save articles of interest!</h2>
                         </Jumbotron>
                         <form>
                             Topic
