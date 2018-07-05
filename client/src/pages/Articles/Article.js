@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-//import DeleteBtn from "../../components/DeleteBtn";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
-//import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
-//import { List, ListItem } from "../../components/List";
 import { Input, FormBtn } from "../../components/Form";
 import axios from 'axios';
-//const API = require("../../utils/API");
 
 // const backgroundStyle = {
 
@@ -47,12 +43,6 @@ class Article extends Component {
     componentDidMount() {
 
     };
-
-    // response.docs[i].headline.main
-    // response.docs[i].pub_date
-    // response.docs[i].web_url
-    // response.docs[i]._id
-
 
  //******** LOAD ARTICLE ***************////   
     loadArticle = () => {
@@ -107,10 +97,6 @@ class Article extends Component {
         });
     };
   
-    // response.docs[i].headline.main
-    // response.docs[i].pub_date
-    // response.docs[i].web_url
-    // response.docs[i]._id
 
     render() {
         let displayArticles = this.state.article.map((eachItem, index) => 
@@ -161,7 +147,6 @@ class Article extends Component {
                                 placeholder="End Year (Required)"
                             />
                             <FormBtn
-                                // disabled={!(this.state.author && this.state.title)}
                                 onClick={this.handleFormSubmit}
                             >
                                 Search
@@ -174,11 +159,7 @@ class Article extends Component {
                         </Jumbotron>
 
                         {displayArticles}
-                        {/* {displayArticles.length ? (
-                   
-                        ) : (
-                                <h3>No Results to Display</h3>
-                            )} */}
+
 
                         <Jumbotron>
                             <h1>Saved Articles</h1>
