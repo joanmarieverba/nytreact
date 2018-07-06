@@ -115,7 +115,7 @@ class Article extends Component {
 
         );
         return (
-   
+            // <div style={{ backgroundImage: `url(require("news.jpg"))` }}>
             <Container fluid >
             {/* <div style={backgroundStyle} > */}
                 <Row>
@@ -170,7 +170,7 @@ class Article extends Component {
                 </Row>
             {/* </div> */}
             </Container>
-       
+        
         );
     }
 }
@@ -178,13 +178,3 @@ class Article extends Component {
 export default Article;
 
 
-
-
-// exports default class MyComponent extends React.Component {
-//     render() {
-//         return (
-//             const dateToFormat = '1976-04-19T12:59-0500';
-//             <Moment> { dateToFormat }</Moment >
-//         );
-//     }
-// }
