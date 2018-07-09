@@ -1,0 +1,9 @@
+.mycontainer {
+    /* background-image: url("./news.jpg"); */
+    /* height:100vh; */
+      background: url(./news.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

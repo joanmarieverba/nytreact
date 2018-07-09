@@ -4,16 +4,7 @@ import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Input, FormBtn } from "../../components/Form";
 import axios from 'axios';
-//import Background from "news.jpg";
-
-// const backgroundStyle = {
-//      backgroundImage: 'url("news.jpg")',
-//    backgroundImage: `url(${Background})`,
-//     width: '100%',
-//     minHeight: '100%',
-//     backgroundSize: "100%",
-// };
-
+import "./style.css"
 
 const btnStyle = {
     float: "right",
@@ -116,8 +107,9 @@ class Article extends Component {
         );
         return (
             // <div style={{ backgroundImage: `url(require("news.jpg"))` }}>
+            <div className="mycontainer" >
             <Container fluid >
-            {/* <div style={backgroundStyle} > */}
+      
                 <Row>
                     <Col size="md-6">
                         <Jumbotron>
@@ -168,9 +160,9 @@ class Article extends Component {
 
                     </Col>
                 </Row>
-            {/* </div> */}
+         
             </Container>
-        
+            </div>
         );
     }
 }
