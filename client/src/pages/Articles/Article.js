@@ -57,7 +57,6 @@ class Article extends Component {
     saveArticle = index => {
         const articleData = {
             title: this.state.article[index].headline.main,
-       //     date: this.state.article[index].pub_date,
             url: this.state.article[index].web_url,
             saved: true,
             nytid: this.state.article[index]._id}
@@ -84,6 +83,7 @@ class Article extends Component {
                 console.log("res.data ", res.data.response.docs);
                 this.setState({ article: res.data.response.docs });
                 console.log("article ", this.state.article);
+                //clear form
                 this.setState({
                     title: "",
                     startYear: "",
