@@ -84,8 +84,13 @@ class Article extends Component {
                 console.log("res.data ", res.data.response.docs);
                 this.setState({ article: res.data.response.docs });
                 console.log("article ", this.state.article);
-
+                this.setState({
+                    title: "",
+                    startYear: "",
+                    endYear: ""
+                })
         });
+
     };
   
 
