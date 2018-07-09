@@ -4,3 +4,4 @@ User enters topic, start year, and end year.
 Articles are displayed with a SAVE button. User clicks on SAVE button to save article to database.
 All saved articles are displayed with a DELETE button. User can delete a saved article. 
 ![alt text](nytreact.png) 
+![alt text](nytreact2.png) 
